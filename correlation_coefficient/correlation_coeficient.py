@@ -1,4 +1,4 @@
-# Proteins Correlation Coefficient
+# Correlation Coefficient
 
 import mysql.connector
 import re
