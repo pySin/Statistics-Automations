@@ -19,4 +19,4 @@ Python(mysql.connector, math and re libraries)
 ## Examples of use
 The result should look like this:
 
-![Show the MySQL Data Imort Wizard](https://raw.githubusercontent.com/pySin/Statistics-Automations/main/pictures/c_correlation.png)
+![Show the MySQL Data Import Wizard](https://raw.githubusercontent.com/pySin/Statistics-Automations/main/pictures/c_correlation.png)
