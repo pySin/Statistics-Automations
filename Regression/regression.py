@@ -1,5 +1,5 @@
 # Regression
-from curses.ascii import isdigit
+# from curses.ascii import isdigit
 
 
 class Regression:
@@ -8,14 +8,22 @@ class Regression:
         self.x_values_iv = None
         self.y_values_dv = None
 
+    @staticmethod
+    def check_digit(num):
+        try:
+            check_num = num + 1
+        except TypeError:
+            return False
+        return True
+
     def receive_data(self, x_values_iv, y_values_dv):
         if len(x_values_iv) != len(y_values_dv):
             raise ValueError("The amount of x values has to be the same as the amount of y values!")
 
-        if not all(map(isdigit, x_values_iv)):
+        if not all(map(self.check_digit, x_values_iv)):
             raise ValueError("All x values has to be numeric!")
 
-        if not all(map(isdigit, y_values_dv)):
+        if not all(map(self.check_digit, y_values_dv)):
             raise ValueError("All y values has to be numeric!")
 
         if type(x_values_iv) != list or type(y_values_dv) != list:
