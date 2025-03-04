@@ -1,5 +1,7 @@
 # Regression
-from Regression.plot import intercept
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 class Regression:
@@ -65,4 +67,20 @@ class Regression:
         slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
         y_on_regression_line = [intercept_xy + (slope * x) for x in self.x_values_iv]
         print(f"Y on regression: {y_on_regression_line}")
+
+        # Create the regression plot
+        plt.figure(figsize=(8, 6))
+        sns.scatterplot(x=self.x_values_iv, y=self.y_values_dv, color='blue', label='Data Points')  # Plot data points
+        plt.plot(self.x_values_iv, y_on_regression_line, color='red',
+                 label=f'Regression Line: y = {intercept_xy:.2f} + {slope:.2f}x')  # Plot regression line
+
+        # Add labels and title
+        plt.xlabel('Independent Variable (x)')
+        plt.ylabel('Dependent Variable (y)')
+        plt.title('Regression Plot')
+        plt.legend()
+        plt.grid(True)
+
+        # Show the plot
+        plt.show()
 
