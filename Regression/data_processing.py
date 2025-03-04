@@ -22,16 +22,21 @@ class ProcessData:
         return col_combinations
 
 
-independent_var = "LifeExpectancy"
-dependent_var = "GNP"
+def caller():
+    numeric_cols = ["LifeExpectancy", "GNP"]
+    process_data = ProcessData("world", "country", numeric_cols)
 
-query = "SELECT LifeExpectancy, GNP FROM world.country;"
 
-cursor = conn.cursor()
-cursor.execute(query)
-results = cursor.fetchall()
-
-for result in results:
-    print(f"Result: {result[0]}")
-
-print(f"Results: {results}")
+# independent_var = "LifeExpectancy"
+# dependent_var = "GNP"
+#
+# query = "SELECT LifeExpectancy, GNP FROM world.country;"
+#
+# cursor = conn.cursor()
+# cursor.execute(query)
+# results = cursor.fetchall()
+#
+# for result in results:
+#     print(f"Result: {result[0]}")
+#
+# print(f"Results: {results}")
