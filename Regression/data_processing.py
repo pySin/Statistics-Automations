@@ -1,9 +1,26 @@
 # Data Processing
-
 import mysql.connector
 
-conn = mysql.connector.connect(host='localhost', user='root',
-                               password='dance')  # MySQL connection.
+
+class ProcessData:
+
+    def __init__(self, database: str, table: str, numeric_columns: list):
+        self.conn = mysql.connector.connect(host='localhost', user='root',
+                                       password='dance')  # MySQL connection.
+        self.database = database
+        self.table = table
+        self.numeric_columns = numeric_columns
+
+    def columns_combinations(self):
+
+        col_combinations = []
+
+        for col in self.numeric_columns:
+            for col_s in self.numeric_columns:
+                if [col, col_s] not in col_combinations:
+                    col_combinations.append([col, col_s])
+        return col_combinations
+
 
 independent_var = "LifeExpectancy"
 dependent_var = "GNP"
