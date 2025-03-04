@@ -58,7 +58,11 @@ class Regression:
         slope = self.slope_calculate(x_values_iv, y_values_dv)
 
         intercept_xy = y_mean - (slope * x_mean)
+        return intercept_xy
 
     def regression_plot(self):
-        pass
+        intercept_xy = self.intercept_calculate(self.x_values_iv, self.y_values_dv)
+        slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
+        y_on_regression_line = [intercept_xy + (slope * x) for x in self.x_values_iv]
+        print(f"Y on regression: {y_on_regression_line}")
 
