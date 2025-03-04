@@ -22,6 +22,12 @@ class ProcessData:
         print(f"Column Combinations: {col_combinations}")
         return col_combinations
 
+    def get_raw_col_data(self, col_combination: list):
+        independent_var = col_combination[0]
+        dependent_var = col_combination[1]
+
+        query = f"SELECT {independent_var}, {dependent_var} FROM {self.database}.{self.table};"
+
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
