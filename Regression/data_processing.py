@@ -19,7 +19,6 @@ class ProcessData:
             for col_s in self.numeric_columns:
                 if col != col_s and [col, col_s] not in col_combinations:
                     col_combinations.append([col, col_s])
-        print(f"Column Combinations: {col_combinations}")
         return col_combinations
 
     def get_raw_col_data(self, col_combination: list):
@@ -28,11 +27,35 @@ class ProcessData:
 
         query = f"SELECT {independent_var}, {dependent_var} FROM {self.database}.{self.table};"
 
+        cursor = self.conn.cursor()
+        cursor.execute(query)
+        raw_data = cursor.fetchall()
+        return raw_data
+
+
+    @staticmethod
+    def data_clear_zero_null(raw_data: list):
+
+        data_list = []
+
+        for row in raw_data:
+            try:
+                data_list.append([float(row[0]), float(row[1])])
+            except Exception:
+                pass
+
+        data_list = [d for d in data_list if d[0] != 0 and d[1] != 0]
+        print(f"List Data: {data_list}")
+        print(f"List Data Length: {len(data_list)}")
+        return data_list
+
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
     process_data = ProcessData("world", "country", numeric_cols)
     process_data.columns_combinations()
+    rd = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
+    process_data.data_clear_zero_null(rd)
 
 
 if __name__ == "__main__":
