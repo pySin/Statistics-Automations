@@ -17,14 +17,20 @@ class ProcessData:
 
         for col in self.numeric_columns:
             for col_s in self.numeric_columns:
-                if [col, col_s] not in col_combinations:
+                if col != col_s and [col, col_s] not in col_combinations:
                     col_combinations.append([col, col_s])
+        print(f"Column Combinations: {col_combinations}")
         return col_combinations
 
 
 def caller():
-    numeric_cols = ["LifeExpectancy", "GNP"]
+    numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
     process_data = ProcessData("world", "country", numeric_cols)
+    process_data.columns_combinations()
+
+
+if __name__ == "__main__":
+    caller()
 
 
 # independent_var = "LifeExpectancy"
