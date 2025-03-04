@@ -1,5 +1,5 @@
 # Regression
-# from curses.ascii import isdigit
+from Regression.plot import intercept
 
 
 class Regression:
@@ -47,6 +47,18 @@ class Regression:
             xy_summation += (self.x_values_iv[i] - x_mean) * (self.y_values_dv[i] - y_mean)
             x_2_summation += (self.x_values_iv[i] - x_mean) ** 2
 
-        slope = xy_summation / x_2_summation
+        slope = round(xy_summation / x_2_summation, 4)
         print(f"Slope: {slope}")
+        return slope
+
+    def intercept_calculate(self, x_values_iv, y_values_dv):
+        x_mean = sum(self.x_values_iv) / len(self.x_values_iv)
+        y_mean = sum(self.y_values_dv) / len(self.y_values_dv)
+
+        slope = self.slope_calculate(x_values_iv, y_values_dv)
+
+        intercept_xy = y_mean - (slope * x_mean)
+
+    def regression_plot(self):
+        pass
 
