@@ -49,6 +49,8 @@ class ProcessData:
         print(f"List Data Length: {len(data_list)}")
         return data_list
 
+    def clear_outliers(self):
+        x_y_data = self.data_clear_zero_null()
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
