@@ -1,5 +1,6 @@
 # Data Processing
 import mysql.connector
+import math
 
 
 class ProcessData:
@@ -49,15 +50,27 @@ class ProcessData:
         print(f"List Data Length: {len(data_list)}")
         return data_list
 
-    def clear_outliers(self):
-        x_y_data = self.data_clear_zero_null()
+    @staticmethod
+    def clear_outliers(no_null_zero_data):
+
+        independent_val = [x[0] for x in no_null_zero_data]
+        x_mean = sum(independent_val) / len(independent_val)
+        x_summation = 0
+
+        for x_val in independent_val:
+            x_summation += (x_val - x_mean) ** 2
+
+        standard_deviation_x = math.sqrt(x_summation / len(independent_val))
+        print(f"Standard Deviation: {standard_deviation_x}")
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
     process_data = ProcessData("world", "country", numeric_cols)
     process_data.columns_combinations()
-    rd = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
-    process_data.data_clear_zero_null(rd)
+    raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
+    no_nz_data = process_data.data_clear_zero_null(raw_data)
+    # no_outliers_data = process_data.clear_outliers(no_nz_data)
+    process_data.clear_outliers([[10, 2], [12, 2], [12, 4], [13, 6], [12, 3], [14, 8], [13, 2], [15, 6], [100, 3]])
 
 
 if __name__ == "__main__":
