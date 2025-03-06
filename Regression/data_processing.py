@@ -53,15 +53,24 @@ class ProcessData:
     @staticmethod
     def clear_outliers(no_null_zero_data):
 
-        independent_val = [x[0] for x in no_null_zero_data]
-        x_mean = sum(independent_val) / len(independent_val)
+        # Find Standard deviation for X
+        independent_val_x = [x[0] for x in no_null_zero_data]
+        x_mean = sum(independent_val_x) / len(independent_val_x)
         x_summation = 0
 
-        for x_val in independent_val:
+        for x_val in independent_val_x:
             x_summation += (x_val - x_mean) ** 2
 
-        standard_deviation_x = math.sqrt(x_summation / len(independent_val))
+        standard_deviation_x = math.sqrt(x_summation / len(independent_val_x))
         print(f"Standard Deviation: {standard_deviation_x}")
+
+        # Find Standard deviation for Y
+        independent_val_y = [y[2] for y in no_null_zero_data]
+        y_mean = sum(independent_val_y) / len(independent_val_y)
+        y_summation = 0
+
+        for y_val in independent_val_y:
+            y_summation += (y_val - y_mean) ** 2
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
@@ -69,8 +78,7 @@ def caller():
     process_data.columns_combinations()
     raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
     no_nz_data = process_data.data_clear_zero_null(raw_data)
-    # no_outliers_data = process_data.clear_outliers(no_nz_data)
-    process_data.clear_outliers([[10, 2], [12, 2], [12, 4], [13, 6], [12, 3], [14, 8], [13, 2], [15, 6], [100, 3]])
+    no_outliers_data = process_data.clear_outliers(no_nz_data)
 
 
 if __name__ == "__main__":
