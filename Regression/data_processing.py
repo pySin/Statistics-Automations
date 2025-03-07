@@ -56,6 +56,7 @@ class ProcessData:
         # Find Standard deviation for X
         independent_val_x = [x[0] for x in no_null_zero_data]
         x_mean = sum(independent_val_x) / len(independent_val_x)
+        print(f"Mean X: {x_mean}")
         x_summation = 0
 
         for x_val in independent_val_x:
@@ -65,12 +66,26 @@ class ProcessData:
         print(f"Standard Deviation: {standard_deviation_x}")
 
         # Find Standard deviation for Y
-        independent_val_y = [y[2] for y in no_null_zero_data]
+        independent_val_y = [y[1] for y in no_null_zero_data]
+        print(f"Max of Y: {max(independent_val_y)}")
         y_mean = sum(independent_val_y) / len(independent_val_y)
+        print(f"Y mean: {y_mean}")
         y_summation = 0
 
         for y_val in independent_val_y:
             y_summation += (y_val - y_mean) ** 2
+
+        standard_deviation_y = math.sqrt(y_summation / len(independent_val_y))
+        print(f"Standard Deviation: {standard_deviation_y}")
+
+        no_null_zero_data = [cd for cd in no_null_zero_data
+                             if
+                             (x_mean - (3 * standard_deviation_x)) < cd[0] < (x_mean + (3 * standard_deviation_x))
+                             and
+                             (y_mean - (3 * standard_deviation_y)) < cd[0] < (y_mean + (3 * standard_deviation_y))]
+        print(f"Data len without outliers: {len(no_null_zero_data)}")
+        return no_null_zero_data
+
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
