@@ -86,7 +86,8 @@ class ProcessData:
         print(f"Data len without outliers: {len(no_null_zero_data)}")
         return no_null_zero_data
 
-    def x_bins(self, clear_data):
+    @staticmethod
+    def x_bins_y_mean(clear_data):
         print(f"X bins: {clear_data}")
 
         max_x = max([x[0] for x in clear_data])
@@ -117,8 +118,14 @@ class ProcessData:
         print(f"Labels: {labels}")
 
         x_y = [[round(sum(xy_v[0]) / len(xy_v[0]), 2), round(sum(xy_v[1]) / len(xy_v[1]), 2)] for xy_v in x_bins_y_set]
+        x_y = sorted(x_y, key=lambda x: x[0])
+        print(f"XY sorted: {x_y}")
+        x = [xy[0] for xy in x_y]
+        y = [xy[1] for xy in x_y]
+        print(f"Xv: {x}")
+        print(f"Yv: {y}")
 
-        print(f"XYv: {x_y}")
+        return x, y, labels
 
 
 
@@ -129,7 +136,8 @@ def caller():
     raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
     no_nz_data = process_data.data_clear_zero_null(raw_data)
     no_outliers_data = process_data.clear_outliers(no_nz_data)
-    x_bins_y = process_data.x_bins(no_outliers_data)
+    x_bins_y = process_data.x_bins_y_mean(no_outliers_data)
+    print(x_bins_y)
 
 
 if __name__ == "__main__":
