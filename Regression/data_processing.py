@@ -113,11 +113,10 @@ class ProcessData:
 
         print(f"XY bin set: {x_bins_y_set}")
 
-        labels = [xb[0] for xb in x_bins_y_set]
+        labels = [str([round(xb[0][0], 2), round(xb[0][1], 2)])[1:-1].replace(", ", " - ") for xb in x_bins_y_set]
+        print(f"Labels: {labels}")
 
-
-
-        print(f"XY_bin_val: {x_bins_y_values}")
+        x_y = [xy_v for xy_v in x_bins_y_set]
 
 
 
