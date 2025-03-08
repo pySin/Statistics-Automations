@@ -127,17 +127,28 @@ class ProcessData:
 
         return x, y, labels
 
+    def process_data(self, column_pair: list):
+        raw_data = self.get_raw_col_data(column_pair)
+        no_null_zero_data = self.data_clear_zero_null(raw_data)
+        no_outliers_data = self.clear_outliers(no_null_zero_data)
+        x, y, labels = self.x_bins_y_mean(no_outliers_data)
+        print(f"Labels_PD: {x, y, labels}")
+        return x, y label
+
+
+
 
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
     process_data = ProcessData("world", "country", numeric_cols)
     process_data.columns_combinations()
-    raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
-    no_nz_data = process_data.data_clear_zero_null(raw_data)
-    no_outliers_data = process_data.clear_outliers(no_nz_data)
-    x_bins_y = process_data.x_bins_y_mean(no_outliers_data)
-    print(x_bins_y)
+    # raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
+    # no_nz_data = process_data.data_clear_zero_null(raw_data)
+    # no_outliers_data = process_data.clear_outliers(no_nz_data)
+    # x_bins_y = process_data.x_bins_y_mean(no_outliers_data)
+    # print(x_bins_y)
+    process_data.process_data(["LifeExpectancy", "GNP"])
 
 
 if __name__ == "__main__":
