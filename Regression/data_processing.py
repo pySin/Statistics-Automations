@@ -86,6 +86,24 @@ class ProcessData:
         print(f"Data len without outliers: {len(no_null_zero_data)}")
         return no_null_zero_data
 
+    def x_bins(self, clear_data):
+        print(f"X bins: {clear_data}")
+
+        max_x = max([x[0] for x in clear_data])
+        min_x = min([x[0] for x in clear_data])
+        x_range = max_x - min_x
+        bin_range = x_range / 10
+
+        x_bins_y_values = []
+
+        for v in clear_data:
+            for i in range(10):
+                if min_x + (i * bin_range) <= v[0] < min_x + (bin_range * (i + 1)):
+                    x_bins_y_values.append([[min_x + (i * bin_range), min_x + (bin_range * (i + 1))], [v[1]]])
+
+        print(f"XY_bin_val: {x_bins_y_values}")
+
+
 
 def caller():
     numeric_cols = ["LifeExpectancy", "GNP", "GNPOld"]
@@ -94,6 +112,7 @@ def caller():
     raw_data = process_data.get_raw_col_data(["LifeExpectancy", "GNP"])
     no_nz_data = process_data.data_clear_zero_null(raw_data)
     no_outliers_data = process_data.clear_outliers(no_nz_data)
+    x_bins_y = process_data.x_bins(no_outliers_data)
 
 
 if __name__ == "__main__":
