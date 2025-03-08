@@ -46,8 +46,6 @@ class ProcessData:
                 pass
 
         data_list = [d for d in data_list if d[0] != 0 and d[1] != 0]
-        print(f"List Data: {data_list}")
-        print(f"List Data Length: {len(data_list)}")
         return data_list
 
     @staticmethod
@@ -56,39 +54,32 @@ class ProcessData:
         # Find Standard deviation for X
         independent_val_x = [x[0] for x in no_null_zero_data]
         x_mean = sum(independent_val_x) / len(independent_val_x)
-        print(f"Mean X: {x_mean}")
         x_summation = 0
 
         for x_val in independent_val_x:
             x_summation += (x_val - x_mean) ** 2
 
         standard_deviation_x = math.sqrt(x_summation / len(independent_val_x))
-        print(f"Standard Deviation: {standard_deviation_x}")
 
         # Find Standard deviation for Y
         independent_val_y = [y[1] for y in no_null_zero_data]
-        print(f"Max of Y: {max(independent_val_y)}")
         y_mean = sum(independent_val_y) / len(independent_val_y)
-        print(f"Y mean: {y_mean}")
         y_summation = 0
 
         for y_val in independent_val_y:
             y_summation += (y_val - y_mean) ** 2
 
         standard_deviation_y = math.sqrt(y_summation / len(independent_val_y))
-        print(f"Standard Deviation: {standard_deviation_y}")
 
         no_null_zero_data = [cd for cd in no_null_zero_data
                              if
                              (x_mean - (3 * standard_deviation_x)) < cd[0] < (x_mean + (3 * standard_deviation_x))
                              and
                              (y_mean - (3 * standard_deviation_y)) < cd[0] < (y_mean + (3 * standard_deviation_y))]
-        print(f"Data len without outliers: {len(no_null_zero_data)}")
         return no_null_zero_data
 
     @staticmethod
     def x_bins_y_mean(clear_data):
-        print(f"X bins: {clear_data}")
 
         max_x = max([x[0] for x in clear_data])
         min_x = min([x[0] for x in clear_data])
@@ -112,18 +103,13 @@ class ProcessData:
             else:
                 x_bins_y_set.append(xy)
 
-        print(f"XY bin set: {x_bins_y_set}")
 
         labels = [str([round(xb[0][0], 2), round(xb[0][1], 2)])[1:-1].replace(", ", " - ") for xb in x_bins_y_set]
-        print(f"Labels: {labels}")
 
         x_y = [[round(sum(xy_v[0]) / len(xy_v[0]), 2), round(sum(xy_v[1]) / len(xy_v[1]), 2)] for xy_v in x_bins_y_set]
         x_y = sorted(x_y, key=lambda x: x[0])
-        print(f"XY sorted: {x_y}")
         x = [xy[0] for xy in x_y]
         y = [xy[1] for xy in x_y]
-        print(f"Xv: {x}")
-        print(f"Yv: {y}")
 
         return x, y, labels
 
@@ -133,7 +119,7 @@ class ProcessData:
         no_outliers_data = self.clear_outliers(no_null_zero_data)
         x, y, labels = self.x_bins_y_mean(no_outliers_data)
         print(f"Labels_PD: {x, y, labels}")
-        return x, y label
+        return x, y, labels
 
 
 
