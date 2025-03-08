@@ -101,6 +101,20 @@ class ProcessData:
                 if min_x + (i * bin_range) <= v[0] < min_x + (bin_range * (i + 1)):
                     x_bins_y_values.append([[min_x + (i * bin_range), min_x + (bin_range * (i + 1))], [v[1]]])
 
+        x_bins_y_set = []
+
+        for xy in x_bins_y_values:
+            if xy[0] in [xs[0] for xs in x_bins_y_set]:
+                for xi in range(len(x_bins_y_set)):
+                    if x_bins_y_set[xi][0] == xy[0]:
+                        x_bins_y_set[xi][1].append(xy[1][0])
+            else:
+                x_bins_y_set.append(xy)
+
+        print(f"XY bin set: {x_bins_y_set}")
+
+
+
         print(f"XY_bin_val: {x_bins_y_values}")
 
 
