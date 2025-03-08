@@ -113,6 +113,8 @@ class ProcessData:
 
         print(f"XY bin set: {x_bins_y_set}")
 
+        labels = [xb[0] for xb in x_bins_y_set]
+
 
 
         print(f"XY_bin_val: {x_bins_y_values}")
