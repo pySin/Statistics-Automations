@@ -103,8 +103,11 @@ class ProcessData:
             else:
                 x_bins_y_set.append(xy)
 
+        # x_y = sorted(x_y, key=lambda x: x[0])
+        x_bins_y_set = sorted(x_bins_y_set, key=lambda x: x[0][0])
 
         labels = [str([round(xb[0][0], 2), round(xb[0][1], 2)])[1:-1].replace(", ", " - ") for xb in x_bins_y_set]
+        print(f"X bin Y set: {x_bins_y_set}")
 
         x_y = [[round(sum(xy_v[0]) / len(xy_v[0]), 2), round(sum(xy_v[1]) / len(xy_v[1]), 2)] for xy_v in x_bins_y_set]
         x_y = sorted(x_y, key=lambda x: x[0])
