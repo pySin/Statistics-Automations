@@ -9,3 +9,17 @@ y = np.array([3370.67, 3907.8, 2711.93, 35223.27, 7908.08, 72312.35, 33119.75, 5
 # Add a column of ones for the intercept
 A = np.vstack([x, np.ones(len(x))]).T
 print(A)
+
+from scipy.optimize import nnls
+
+# Fit the model using NNLS
+coefficients, _ = nnls(A, y)
+
+# Extract the slope and intercept
+slope = coefficients[0]
+intercept = coefficients[1]
+
+print(f"Slope: {slope}")
+print(f"Intercept: {intercept}")
+
+
