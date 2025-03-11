@@ -74,7 +74,7 @@ class Regression:
                  label=f'Regression Line: y = {intercept_xy:.2f} + {slope:.2f}x')  # Plot regression line
 
         # Add adjusted x-labels
-        plt.xticks(self.x_values_iv, x_labels, fontsize=6, rotation=45, ha="right")
+        plt.xticks(self.x_values_iv, x_labels, fontsize=8, rotation=45, ha="right")
 
         # Add labels and title
         x_column = column_combination[0]
@@ -89,8 +89,12 @@ class Regression:
         # Show the plot
         # plt.show()
 
+        # Find longest label
+        longest_label = max([len(l) for l in x_labels])
+        print(f"Max label: {longest_label}")
+
         # Increase bottom margin
-        plt.subplots_adjust(bottom=0.15)
+        plt.subplots_adjust(bottom=(longest_label / 100) + 0.05)
 
         # Save plot
         plt.savefig(f"plots/{x_column} - {y_column}.png")

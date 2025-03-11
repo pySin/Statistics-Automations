@@ -51,6 +51,8 @@ class ProcessData:
     @staticmethod
     def clear_outliers(no_null_zero_data):
 
+        print(f"No Null data: {no_null_zero_data}")
+
         # Find Standard deviation for X
         independent_val_x = [x[0] for x in no_null_zero_data]
         x_mean = sum(independent_val_x) / len(independent_val_x)
@@ -75,11 +77,14 @@ class ProcessData:
                              if
                              (x_mean - (3 * standard_deviation_x)) < cd[0] < (x_mean + (3 * standard_deviation_x))
                              and
-                             (y_mean - (3 * standard_deviation_y)) < cd[0] < (y_mean + (3 * standard_deviation_y))]
+                             (y_mean - (3 * standard_deviation_y)) < cd[1] < (y_mean + (3 * standard_deviation_y))]
+        print(f"No Null Zero data after outlier removal: {no_null_zero_data}")
         return no_null_zero_data
 
     @staticmethod
     def x_bins_y_mean(clear_data):
+
+        print(f"Clear Data: {clear_data}")
 
         max_x = max([x[0] for x in clear_data])
         min_x = min([x[0] for x in clear_data])
@@ -92,6 +97,7 @@ class ProcessData:
             for i in range(10):
                 if min_x + (i * bin_range) <= v[0] < min_x + (bin_range * (i + 1)):
                     x_bins_y_values.append([[min_x + (i * bin_range), min_x + (bin_range * (i + 1))], [v[1]]])
+        print(f"X bins Y values: {x_bins_y_values}")
 
         x_bins_y_set = []
 
