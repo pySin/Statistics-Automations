@@ -82,7 +82,7 @@ class Regression:
         y_column = column_combination[1]
         plt.ylabel(y_column)
 
-        plt.title(f'{database} {table}')
+        plt.title(f'{database} {table}'.title())
         plt.legend()
         plt.grid(True)
 
