@@ -8,7 +8,7 @@ y_values = [25, 38, 29, 115, 82, 114, 120, 160, 153, 190, 239, 175]
 if __name__ == "__main__":
     database = "world"
     table = "country"
-    numeric_columns = ["LifeExpectancy", "GNP", "GNPOld"]
+    numeric_columns = ["LifeExpectancy", "GNP", "GNPOld", "SurfaceArea", "Population"]
 
     process_data = ProcessData(database, table, numeric_columns)
     column_combinations = process_data.columns_combinations()

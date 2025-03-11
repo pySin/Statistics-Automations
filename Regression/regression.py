@@ -45,11 +45,15 @@ class Regression:
 
         xy_summation = 0
         x_2_summation = 0
+        print(f"X values iv: {x_values_iv}")
+        print(f"Y values dv: {y_values_dv}")
         for i in range(len(self.x_values_iv)):
             xy_summation += (self.x_values_iv[i] - x_mean) * (self.y_values_dv[i] - y_mean)
             x_2_summation += (self.x_values_iv[i] - x_mean) ** 2
+        print(f"XY summation: {xy_summation}")
+        print(f"X_2 summation: {x_2_summation}")
 
-        slope = round(xy_summation / x_2_summation, 4)
+        slope = xy_summation / x_2_summation
         print(f"Slope: {slope}")
         return slope
 
