@@ -87,5 +87,11 @@ class Regression:
         plt.grid(True)
 
         # Show the plot
-        plt.show()
+        # plt.show()
+
+        # Increase bottom margin
+        plt.subplots_adjust(bottom=0.15)
+
+        # Save plot
+        plt.savefig(f"plots/{x_column} - {y_column}.png")
 

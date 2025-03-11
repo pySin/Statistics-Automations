@@ -12,10 +12,11 @@ if __name__ == "__main__":
 
     process_data = ProcessData(database, table, numeric_columns)
     column_combinations = process_data.columns_combinations()
-    current_combination = ["LifeExpectancy", "GNP"]
-    x, y, labels = process_data.process_data(current_combination)
 
-    regression_c = Regression()
-    regression_c.slope_calculate(x, y)
-    regression_c.regression_plot(labels, current_combination, database, table)
+    for current_combination in column_combinations:
+        x, y, labels = process_data.process_data(current_combination)
+
+        regression_c = Regression()
+        regression_c.slope_calculate(x, y)
+        regression_c.regression_plot(labels, current_combination, database, table)
 
