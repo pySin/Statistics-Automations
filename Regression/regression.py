@@ -62,7 +62,7 @@ class Regression:
         intercept_xy = y_mean - (slope * x_mean)
         return intercept_xy
 
-    def regression_plot(self, x_labels):
+    def regression_plot(self, x_labels, column_combination, database, table):
         intercept_xy = self.intercept_calculate(self.x_values_iv, self.y_values_dv)
         slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
         y_on_regression_line = [intercept_xy + (slope * x) for x in self.x_values_iv]
@@ -77,9 +77,12 @@ class Regression:
         plt.xticks(self.x_values_iv, x_labels, fontsize=6, rotation=45, ha="right")
 
         # Add labels and title
-        plt.xlabel('Independent Variable (x)')
-        plt.ylabel('Dependent Variable (y)')
-        plt.title('Regression Plot')
+        x_column = column_combination[0]
+        plt.xlabel(x_column)
+        y_column = column_combination[1]
+        plt.ylabel(y_column)
+
+        plt.title(f'{database} {table}')
         plt.legend()
         plt.grid(True)
 
