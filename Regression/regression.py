@@ -60,6 +60,7 @@ class Regression:
         slope = self.slope_calculate(x_values_iv, y_values_dv)
 
         intercept_xy = y_mean - (slope * x_mean)
+        print(f"Intercept: {intercept_xy}")
         return intercept_xy
 
     def regression_plot(self, x_labels, column_combination, database, table):
@@ -91,7 +92,6 @@ class Regression:
 
         # Find longest label
         longest_label = max([len(l) for l in x_labels])
-        print(f"Max label: {longest_label}")
 
         # Increase bottom margin
         plt.subplots_adjust(bottom=(longest_label / 100) + 0.05)

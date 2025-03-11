@@ -51,7 +51,7 @@ class ProcessData:
     @staticmethod
     def clear_outliers(no_null_zero_data):
 
-        print(f"No Null data: {no_null_zero_data}")
+        # print(f"No Null data: {no_null_zero_data}")
 
         # Find Standard deviation for X
         independent_val_x = [x[0] for x in no_null_zero_data]
@@ -78,13 +78,13 @@ class ProcessData:
                              (x_mean - (3 * standard_deviation_x)) < cd[0] < (x_mean + (3 * standard_deviation_x))
                              and
                              (y_mean - (3 * standard_deviation_y)) < cd[1] < (y_mean + (3 * standard_deviation_y))]
-        print(f"No Null Zero data after outlier removal: {no_null_zero_data}")
+        # print(f"No Null Zero data after outlier removal: {no_null_zero_data}")
         return no_null_zero_data
 
     @staticmethod
     def x_bins_y_mean(clear_data):
 
-        print(f"Clear Data: {clear_data}")
+        # print(f"Clear Data: {clear_data}")
 
         max_x = max([x[0] for x in clear_data])
         min_x = min([x[0] for x in clear_data])
@@ -97,7 +97,7 @@ class ProcessData:
             for i in range(10):
                 if min_x + (i * bin_range) <= v[0] < min_x + (bin_range * (i + 1)):
                     x_bins_y_values.append([[min_x + (i * bin_range), min_x + (bin_range * (i + 1))], [v[1]]])
-        print(f"X bins Y values: {x_bins_y_values}")
+        # print(f"X bins Y values: {x_bins_y_values}")
 
         x_bins_y_set = []
 
@@ -113,7 +113,7 @@ class ProcessData:
         x_bins_y_set = sorted(x_bins_y_set, key=lambda x: x[0][0])
 
         labels = [str([round(xb[0][0], 2), round(xb[0][1], 2)])[1:-1].replace(", ", " - ") for xb in x_bins_y_set]
-        print(f"X bin Y set: {x_bins_y_set}")
+        # print(f"X bin Y set: {x_bins_y_set}")
 
         x_y = [[round(sum(xy_v[0]) / len(xy_v[0]), 2), round(sum(xy_v[1]) / len(xy_v[1]), 2)] for xy_v in x_bins_y_set]
         x_y = sorted(x_y, key=lambda x: x[0])
@@ -127,7 +127,7 @@ class ProcessData:
         no_null_zero_data = self.data_clear_zero_null(raw_data)
         no_outliers_data = self.clear_outliers(no_null_zero_data)
         x, y, labels = self.x_bins_y_mean(no_outliers_data)
-        print(f"Labels_PD: {x, y, labels}")
+        # print(f"Labels_PD: {x, y, labels}")
         return x, y, labels
 
 
