@@ -74,7 +74,7 @@ class Regression:
                  label=f'Regression Line: y = {intercept_xy:.2f} + {slope:.2f}x')  # Plot regression line
 
         # Add adjusted x-labels
-        plt.xticks(self.x_values_iv, x_labels, rotation=45, ha="right")
+        plt.xticks(self.x_values_iv, x_labels, fontsize=6, rotation=45, ha="right")
 
         # Add labels and title
         plt.xlabel('Independent Variable (x)')

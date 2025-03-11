@@ -17,5 +17,6 @@ if __name__ == "__main__":
     regression_c = Regression()
     regression_c.slope_calculate(x, y)
     regression_c.regression_plot(labels)
+    print(f"Column Combinations: {column_combinations}")
 
 
