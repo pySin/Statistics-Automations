@@ -31,6 +31,11 @@ class ProcessData:
         cursor = self.conn.cursor()
         cursor.execute(query)
         raw_data = cursor.fetchall()
+
+        # if col_combination == ['GNP', 'SurfaceArea']:
+        #     print(f"Column Combination RAW: {col_combination}")
+        #     print(f"Raw Data: {raw_data}")
+
         return raw_data
 
 
@@ -50,7 +55,7 @@ class ProcessData:
 
     @staticmethod
     def clear_outliers(no_null_zero_data):
-
+        print(f"No Null data before outlier removal: {no_null_zero_data}")
         # print(f"No Null data: {no_null_zero_data}")
 
         # Find Standard deviation for X
@@ -78,7 +83,10 @@ class ProcessData:
                              (x_mean - (3 * standard_deviation_x)) < cd[0] < (x_mean + (3 * standard_deviation_x))
                              and
                              (y_mean - (3 * standard_deviation_y)) < cd[1] < (y_mean + (3 * standard_deviation_y))]
-        # print(f"No Null Zero data after outlier removal: {no_null_zero_data}")
+        print(f"Current X Mean: {x_mean}")
+        print(f"Current Y mean: {y_mean}")
+        print(f"Current Standard Deviation: {standard_deviation_x}")
+        print(f"No Null Zero data after outlier removal: {no_null_zero_data}")
         return no_null_zero_data
 
     @staticmethod
@@ -97,7 +105,7 @@ class ProcessData:
             for i in range(10):
                 if min_x + (i * bin_range) <= v[0] < min_x + (bin_range * (i + 1)):
                     x_bins_y_values.append([[min_x + (i * bin_range), min_x + (bin_range * (i + 1))], [v[1]]])
-        # print(f"X bins Y values: {x_bins_y_values}")
+        print(f"X bins Y values: {x_bins_y_values}")
 
         x_bins_y_set = []
 
@@ -111,6 +119,7 @@ class ProcessData:
 
         # x_y = sorted(x_y, key=lambda x: x[0])
         x_bins_y_set = sorted(x_bins_y_set, key=lambda x: x[0][0])
+        print(f"X bins Y set: {x_bins_y_set}")
 
         labels = [str([round(xb[0][0], 2), round(xb[0][1], 2)])[1:-1].replace(", ", " - ") for xb in x_bins_y_set]
         # print(f"X bin Y set: {x_bins_y_set}")

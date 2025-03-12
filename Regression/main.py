@@ -14,6 +14,7 @@ if __name__ == "__main__":
     column_combinations = process_data.columns_combinations()
 
     for current_combination in column_combinations:
+        print(f"Current Combination: {current_combination}")
         x, y, labels = process_data.process_data(current_combination)
 
         regression_c = Regression()
