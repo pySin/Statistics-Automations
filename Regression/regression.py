@@ -80,7 +80,14 @@ class Regression:
         for cx in self.x_values_iv:
             x_squared_summation += cx ** 2
 
+        n = len(self.x_values_iv) - 2
 
+        denominator = n * x_squared_summation
+        print(f"Residuals: {residuals}")
+        print(f"Denominator: {denominator}")
+
+        standard_error = residuals / denominator
+        print(f"Standard Error: {standard_error}")
 
 
 
