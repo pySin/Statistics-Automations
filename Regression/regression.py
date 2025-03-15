@@ -69,8 +69,12 @@ class Regression:
 
     def slope_significance(self):
         slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
-
+        intercept = self.intercept_calculate(self.x_values_iv, self.y_values_dv)
         residuals = 0
+
+        for i in range(len(self.y_values_dv)):
+            residuals += (self.y_values_dv[i] - (intercept + slope * self.x_values_iv[i])) ** 2
+
 
 
 
