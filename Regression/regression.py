@@ -67,6 +67,13 @@ class Regression:
         print(f"Intercept: {intercept_xy}")
         return intercept_xy
 
+    def slope_significance(self):
+        slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
+
+        residuals = 0
+
+
+
     def regression_plot(self, x_labels, column_combination, database, table):
         intercept_xy = self.intercept_calculate(self.x_values_iv, self.y_values_dv)
         slope = self.slope_calculate(self.x_values_iv, self.y_values_dv)
