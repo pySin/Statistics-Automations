@@ -86,9 +86,12 @@ class Regression:
 
         # Calculate p-value (two-tailed test)
         p_value = stats.t.sf(np.abs(t_statistic), n - 2) * 2
+
         if p_value < 0.05:
             return True
         else:
+            print(f"Non significant X values: {self.x_values_iv}")
+            print(f"Non significant Y values: {self.y_values_dv}")
             return False
 
 
