@@ -75,6 +75,13 @@ class Regression:
         for i in range(len(self.y_values_dv)):
             residuals += (self.y_values_dv[i] - (intercept + slope * self.x_values_iv[i])) ** 2
 
+        x_squared_summation = 0
+
+        for cx in self.x_values_iv:
+            x_squared_summation += cx ** 2
+
+
+
 
 
 
