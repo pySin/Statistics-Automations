@@ -51,11 +51,8 @@ class Regression:
         for i in range(len(self.x_values_iv)):
             xy_summation += (self.x_values_iv[i] - x_mean) * (self.y_values_dv[i] - y_mean)
             x_2_summation += (self.x_values_iv[i] - x_mean) ** 2
-        print(f"XY summation: {xy_summation}")
-        print(f"X_2 summation: {x_2_summation}")
 
         slope = xy_summation / x_2_summation
-        print(f"Slope: {slope}")
         return slope
 
     def intercept_calculate(self, x_values_iv, y_values_dv):
@@ -65,7 +62,6 @@ class Regression:
         slope = self.slope_calculate(x_values_iv, y_values_dv)
 
         intercept_xy = y_mean - (slope * x_mean)
-        print(f"Intercept: {intercept_xy}")
         return intercept_xy
 
     def slope_significance(self):
@@ -84,21 +80,17 @@ class Regression:
 
         n = len(self.x_values_iv) - 2
 
+        # Calculate t-statistics
         denominator = n * x_squared_summation
-        print(f"Residuals: {residuals}")
-        print(f"Denominator: {denominator}")
 
         standard_error = residuals / denominator
         standard_error = math.sqrt(standard_error)
-        print(f"Standard Error: {standard_error}")
 
         t_statistic = slope / standard_error
-        print(f"t-statistics: {t_statistic}")
 
         # Calculate p-value (two-tailed test)
         p_value = stats.t.sf(np.abs(t_statistic), n - 2) * 2
-        print(f"P-value: {p_value}")
-        if p_value < 0.0001:
+        if p_value < 0.05:
             print(f"P value is smaller!")
 
 
