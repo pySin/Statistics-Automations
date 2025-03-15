@@ -17,7 +17,10 @@ def caller():
 
         regression_c = Regression()
         regression_c.slope_calculate(x, y)
-        regression_c.regression_plot(labels, current_combination, database, table)
+        if regression_c.slope_significance():
+            regression_c.regression_plot(labels, current_combination, database, table)
+        else:
+            print(f"Slope does not have statistical significance!")
 
 
 if __name__ == "__main__":

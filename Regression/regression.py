@@ -41,13 +41,9 @@ class Regression:
 
         x_mean = sum(self.x_values_iv) / len(self.x_values_iv)
         y_mean = sum(self.y_values_dv) / len(self.y_values_dv)
-        print(f"X mean: {x_mean}")
-        print(f"Y mean: {y_mean}")
 
         xy_summation = 0
         x_2_summation = 0
-        print(f"X values iv: {x_values_iv}")
-        print(f"Y values dv: {y_values_dv}")
         for i in range(len(self.x_values_iv)):
             xy_summation += (self.x_values_iv[i] - x_mean) * (self.y_values_dv[i] - y_mean)
             x_2_summation += (self.x_values_iv[i] - x_mean) ** 2
@@ -91,7 +87,9 @@ class Regression:
         # Calculate p-value (two-tailed test)
         p_value = stats.t.sf(np.abs(t_statistic), n - 2) * 2
         if p_value < 0.05:
-            print(f"P value is smaller!")
+            return True
+        else:
+            return False
 
 
 
