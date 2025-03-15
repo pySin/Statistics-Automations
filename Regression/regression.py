@@ -2,7 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import math
+from scipy import stats
 
 class Regression:
 
@@ -76,9 +77,10 @@ class Regression:
             residuals += (self.y_values_dv[i] - (intercept + slope * self.x_values_iv[i])) ** 2
 
         x_squared_summation = 0
+        x_mean = x_mean = sum(self.x_values_iv) / len(self.x_values_iv)
 
         for cx in self.x_values_iv:
-            x_squared_summation += cx ** 2
+            x_squared_summation += (cx - x_mean) ** 2
 
         n = len(self.x_values_iv) - 2
 
@@ -87,8 +89,17 @@ class Regression:
         print(f"Denominator: {denominator}")
 
         standard_error = residuals / denominator
+        standard_error = math.sqrt(standard_error)
         print(f"Standard Error: {standard_error}")
 
+        t_statistic = slope / standard_error
+        print(f"t-statistics: {t_statistic}")
+
+        # Calculate p-value (two-tailed test)
+        p_value = stats.t.sf(np.abs(t_statistic), n - 2) * 2
+        print(f"P-value: {p_value}")
+        if p_value < 0.0001:
+            print(f"P value is smaller!")
 
 
 
